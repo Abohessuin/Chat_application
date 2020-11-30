@@ -56,11 +56,8 @@ public class chatServer  {
 		ois = new ObjectInputStream(this.clientSocket.getInputStream());
 
 		while(true) {
-			// System.out.println(this.clientSocket);
-			//System.out.println("hg");
-
-
-			clientServerPacket CSP=  (clientServerPacket) ois.readObject();
+		
+	     	clientServerPacket CSP=  (clientServerPacket) ois.readObject();
 
 
 
@@ -291,19 +288,17 @@ public class chatServer  {
 						}
 					}
 				}
-
+				break;
 			}
-			break;
-
-
-
-			default:
+   
+			default:{
 
 				throw new IllegalArgumentException("Unexpected value: " + this.serviceNum);
 			}
 
 		}
 
+	}
 	}
 
 
