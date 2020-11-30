@@ -20,7 +20,7 @@ public class Account {
 	public void setStatues(String statues) {
 		Statues = statues;
 	}
-	private static ArrayList<String> Contacts;
+	private ArrayList<String> Contacts;
 
 	 public Account(String Name,String UserName,String PassWord, ArrayList<String> C){
 			this.Name=Name;
@@ -60,7 +60,9 @@ public void printacc() {
 		return this.Contacts;
 	}
 
-	public void PushContact(String C) {
+	public synchronized void PushContact(String C) {
+		System.out.println("push"+C);
+		System.out.println("in"+this.UserName);
 		this.Contacts.add(C);
 	}
 	public void RemoveContact(String C) {

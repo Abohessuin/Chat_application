@@ -141,6 +141,7 @@ void setbounds(int k) {
 									        }
 										clientServerPacket CP= new clientServerPacket(2,s2,con,"",jpan);
 										//System.out.println(oos + " " + CP + " " + con);
+										 con=new ArrayList<>();
 										oos.writeObject(CP);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
@@ -179,25 +180,7 @@ void setbounds(int k) {
 		jpan.validate();
 		jpan.repaint();
 	}
-	/*
-	public void addlabel(int k1) {
-		for(int i=0 ; i<this.Dms.size() ; i++) {
-		JLabel jlabels = new JLabel();
-		
-		jlabels = new JLabel("Label");
-		//jlabels.setPreferredSize(new Dimension(250, 100));
-		jlabels.setForeground(new Color(120, 90, 40));
-		jlabels.setBackground(new Color(100, 20, 70));
-		jlabels.setSize(1000,200);
-		jlabels.setBounds(0, k1, 400, 75);
-		k1+=10;
-		jpan.add(jlabels);
-		jlabels.setText(Dms.get(i)+"\n");
-
-	jpan.validate();
-	jpan.repaint();
-	}
-	*/
+	
 	
 	@Override
 	public void caretUpdate(CaretEvent arg0) {

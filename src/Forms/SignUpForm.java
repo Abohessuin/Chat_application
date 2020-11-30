@@ -52,7 +52,7 @@ private BufferedReader in;
 		userName_text = new JTextField();
 		// Password Label
 		password_label = new JLabel();
-		password_label.setText("Ypur Name :");
+		password_label.setText("Your Name :");
 		password_text = new JTextField();
 		// Submit
 		submit = new JButton("SUBMIT");

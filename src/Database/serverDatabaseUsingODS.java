@@ -81,8 +81,10 @@ public class serverDatabaseUsingODS implements serverDatabase {
 
 	
 	public void updataAcc(Account A) {
-		for(int i=0 ; i<clientsAccount.size() ; i++) {
-			if(A.GetUserName()==clientsAccount.get(i).GetUserName()) {
+		for(int i=0 ; i<this.clientsAccount.size() ; i++) {
+			if(A.GetUserName().equals(this.clientsAccount.get(i).GetUserName())) {
+				System.out.println("update");
+				System.out.println(this.clientsAccount.get(i).GetUserName());
 				clientsAccount.get(i).setContacts(A.getContacts());
 			}
 		}
@@ -158,6 +160,37 @@ public class serverDatabaseUsingODS implements serverDatabase {
 		return false;
 
 	}
+	
+	@Override
+	public boolean isAccountFoundUserName(String S) {
+		for(int i=0;i<this.clientsAccount.size();i++) {
+		//	System.out.println("make it : "+this.clientsAccount.get(i).GetUserName()+ " " + this.clientsAccount.get(i).GetName() );
+			if(S.equals(this.clientsAccount.get(i).GetUserName())) {
+				System.out.println("right");
+				return true;    		
+			}
+
+
+		}
+		return false;
+
+	}
+	
+	@Override
+	public boolean isAccountFoundpass(String P) {
+		for(int i=0;i<this.clientsAccount.size();i++) {
+		//	System.out.println("make it : "+this.clientsAccount.get(i).GetUserName()+ " " + this.clientsAccount.get(i).GetName() );
+			if(P.equals(this.clientsAccount.get(i).GetName())) {
+				System.out.println("right");
+				return true;    		
+			}
+
+
+		}
+		return false;
+
+	}
+	
 	@Override
 	public boolean isAccountFounduser(String S) {
 		for(int i=0;i<this.clientsAccount.size();i++) {
@@ -174,7 +207,8 @@ public class serverDatabaseUsingODS implements serverDatabase {
 	}
 	public void printclients() {
 		for(int i=0;i<this.clientsAccount.size();i++) {
-			System.out.println(this.clientsAccount.get(i).GetUserName());
+			System.out.println("num"+this.clientsAccount.get(i).GetUserName());
+			System.out.println(this.clientsAccount.get(i).getContacts());
 			
 
 
@@ -226,12 +260,7 @@ public class serverDatabaseUsingODS implements serverDatabase {
 
 	@Override
 	public void setClientId(Socket s, String id) {
-		//System.out.println(s);
-		//System.out.println(id);
-		//System.out.println(clientsIds.size());
-		// clientsIds.keySet().toArray()[clientsIds.size()]=s;
-		// clientsIds.keySet().toArray()[clientsIds.size()]=s;
-		// clientsIds.values().toArray()[clientsIds.size()]=id;
+		
 		this.clientsIds.put(s, id);
 		this.clientsSockets.put(id,s);
 		this.clientssocketssarr.add(s);

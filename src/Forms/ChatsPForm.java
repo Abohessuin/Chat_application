@@ -127,6 +127,7 @@ void setbounds(int k) {
 									         communicatedClients.add(a);
 									        }
 										clientServerPacket CP= new clientServerPacket(8,s2, communicatedClients,"",jpan);
+										 communicatedClients=new ArrayList<>();
 										System.out.println("my fr " +  communicatedClients);
 										oos.writeObject(CP);
 									} catch (IOException e1) {

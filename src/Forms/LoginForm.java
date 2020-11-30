@@ -81,6 +81,16 @@ public class LoginForm extends JFrame implements ActionListener , FormHandling {
 						message.setText(" Hello " + userName + "");
 						new HomeForm(s,oos,in,userName);
 					}
+					else if (k.equals("pass not found")) {
+						message.setText(" Pass fail , 401 error ");
+						userName_text.setText("");
+						password_text.setText("");
+					}
+					else if (k.equals("username not found")) {
+						message.setText(" username fail , 404 error ");
+						userName_text.setText("");
+						password_text.setText("");
+					}
 					else {
 						message.setText(" Invalid user.. ");
 						userName_text.setText("");
