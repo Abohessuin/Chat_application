@@ -3,11 +3,14 @@ package Forms;
 
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -33,13 +36,20 @@ public class connectionchatsform implements Runnable {
 	//	b.MakeForm();
 		String k=null;
 		System.out.println("connectionchatssform");
+
+		 
 		try {
+			int t=0;
 		while(true) {
 			k=in.readLine();
-			//b.Update(k);
-		
+			
+		//	if(k.equals("out")) {
+		//		cf.dispose();
+		//		break;
+		//		
+		//	}
 	    cf.addlabel1(k);
-			//Seth(k);
+			
 			System.out.println("server connectionchatssform says : "+ k);
 		}
 		}

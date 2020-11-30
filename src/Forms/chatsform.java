@@ -34,7 +34,7 @@ public class chatsform extends JFrame implements ActionListener,CaretListener {
 	private ObjectOutputStream oos;
 	private BufferedReader in;
 	private int size=0;
-	private static ArrayList <String> Dms = new  ArrayList <>();
+	public ArrayList<String> con=new ArrayList<>();
 	//private ArrayList<String> Name;
 	//private static serverDatabase SD ;
 	public chatsform(Socket s,ObjectOutputStream oos, BufferedReader in) throws IOException {
@@ -125,17 +125,22 @@ void setbounds(int k) {
 									jlabels.setForeground(new Color(120, 90, 40));
 									jlabels.setBackground(new Color(100, 20, 70));
 									jlabels.setSize(1000,200);
-									jlabels.setBounds(0, k1, 400, 75);
-									k1+=10;
+									jlabels.setBounds(0, k1, 500, 75);
+									k1+=75;
 									jpan.add(jlabels);
 									jlabels.setText(s1+"\n");
 								//	 ObjectOutputStream oos=this.oos;
 									try {
 										//SendtoMyFriend(s1,oos);
-										 ArrayList<String> Names=new ArrayList<>();
-										 Names.add(s1);
-										clientServerPacket CP= new clientServerPacket(2,s2,Names,"",jpan);
-										System.out.println(oos + " " + CP + " " + Names);
+										 
+										// Names.add(s1);
+										 String[] arrOfStr = s1.split(":", -2); 
+
+									        for (String a : arrOfStr) {
+									         con.add(a);
+									        }
+										clientServerPacket CP= new clientServerPacket(2,s2,con,"",jpan);
+										//System.out.println(oos + " " + CP + " " + con);
 										oos.writeObject(CP);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
@@ -166,8 +171,8 @@ void setbounds(int k) {
 		jlabels.setForeground(new Color(120, 90, 40));
 		jlabels.setBackground(new Color(100, 20, 70));
 		jlabels.setSize(1000,200);
-		jlabels.setBounds(0, k1, 75, 75);
-		k1+=10;
+		jlabels.setBounds(0, k1, 500, 75);
+		k1+=75;
 		jpan.add(jlabels);
 		jlabels.setText(d+"\n");
 

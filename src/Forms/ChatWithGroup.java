@@ -140,13 +140,7 @@ public class ChatWithGroup extends JFrame implements ActionListener , FormHandli
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		//serverDatabase SD = new serverDatabaseUsingODS();
-		// Socket s;
-	//	 ObjectOutputStream oos;
-	//		 BufferedReader in;
-	//	new ChatOneForm(SD);
-	}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
