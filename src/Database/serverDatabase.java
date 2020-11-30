@@ -26,6 +26,9 @@ public interface serverDatabase {
 	//public ArrayList<String> getBannedwords();
 	//public ArrayList<Socket> getClientssocketssarr();
 	//public Component getClientssocketssarr1();
+	//boolean isAccountFoundUserName(String S, String P);
+	boolean isAccountFoundUserName(String S);
+	boolean isAccountFoundpass(String P);
 	
 	
 	
