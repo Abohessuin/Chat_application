@@ -1,5 +1,7 @@
 package Forms;
 
+
+
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,14 +11,14 @@ import java.net.Socket;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class connectionChatForm implements Runnable {
+public class connectionpchats implements Runnable {
 	private Socket server ;
 	private BufferedReader in ;
 	private JPanel b ;
-	private ChatForm cf;
 	String h="";
+	private ChatsPForm cf;
 	private int k1;
-	public connectionChatForm(Socket Socket,ChatForm cf,int k1 ) throws IOException {
+	public connectionpchats(Socket Socket,ChatsPForm cf,int k1 ) throws IOException {
 		
 		server = Socket;
 		in = new  BufferedReader(new InputStreamReader(server.getInputStream()));
@@ -30,22 +32,17 @@ public class connectionChatForm implements Runnable {
 		// TODO Auto-generated method stub
 	//	b.MakeForm();
 		String k=null;
-		System.out.println("connectionchatform");
+		System.out.println("connectionpform");
 		try {
 		while(true) {
 			k=in.readLine();
 			//b.Update(k);
-		//	if(k.equals("out")) {
-		//		cf.dispose();
-			//	break;
-				
-		//	}
-		
-		cf.addlabel(k);
 
-		
+
+	    cf.addlabel1(k);
+	 //   cf.setbounds(15);
 			//Seth(k);
-			System.out.println("server (connectionchatform) says : "+ k);
+			System.out.println("server connectionpform says : "+ k);
 		}
 		}
 		catch(IOException e) {

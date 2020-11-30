@@ -1,5 +1,6 @@
 package Database;
 
+import java.awt.Component;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,12 +16,10 @@ public class serverDatabaseUsingODS implements serverDatabase {
 	private static ArrayList<Account>clientsAccount;
 	private static ArrayList<String>clientsidsarr;
 	private static ArrayList<Socket>clientssocketssarr;
-	
+	private static HashMap<String,ArrayList<String>>AccountsRequests;
 	private static serverDatabaseUsingODS singletonObj;
-
+	private static ArrayList<String>bannedwords;
 	
-	 
-	 
 	 
 	public serverDatabaseUsingODS() {
 		this.clientsIds = new HashMap<>();
@@ -28,15 +27,57 @@ public class serverDatabaseUsingODS implements serverDatabase {
 		this.clientsAccount = new ArrayList<>();
 		this.clientssocketssarr = new ArrayList<>();
 		this.clientsidsarr = new ArrayList<>();
-		
+		this.AccountsRequests= new HashMap<>();
+		this.bannedwords=new ArrayList<>();
+		this.bannedwords.add("dog");
+		this.bannedwords.add("nerd");
+		this.bannedwords.add("cow");
+		this.bannedwords.add("fuck");
 	}
-  
+	
+	
+	
+	
+
 	public static serverDatabaseUsingODS getInstance() {
 		if (singletonObj == null) {
 			singletonObj = new serverDatabaseUsingODS();
 		}
 		return singletonObj;
 	}
+	
+	
+	public static ArrayList<Socket> getClientssocketssarr() {
+		return clientssocketssarr;
+	}
+
+	public static void setClientssocketssarr(ArrayList<Socket> clientssocketssarr) {
+		serverDatabaseUsingODS.clientssocketssarr = clientssocketssarr;
+	}
+
+
+	
+	
+
+	 
+	public static HashMap<String, ArrayList<String>> getAccountsRequests() {
+		return AccountsRequests;
+	}
+
+	public static void setAccountsRequests(HashMap<String, ArrayList<String>> accountsRequests) {
+		AccountsRequests = accountsRequests;
+	}
+
+	public static ArrayList<String> getBannedwords() {
+		return bannedwords;
+	}
+
+	public static void setBannedwords(ArrayList<String> bannedwords) {
+		serverDatabaseUsingODS.bannedwords = bannedwords;
+	}
+
+
+  
 
 	
 	public void updataAcc(Account A) {
@@ -49,7 +90,7 @@ public class serverDatabaseUsingODS implements serverDatabase {
 
 	@Override
 	public void setAccount(Account a) {
-		System.out.println("d : "+a);
+		//System.out.println("d : "+a);
 		this.clientsAccount.add(a);
 
 	}
@@ -63,6 +104,34 @@ public class serverDatabaseUsingODS implements serverDatabase {
 
 		return this.clientsIds.get(s);
 	}
+	
+	@Override
+	public void AddReqtoAcc(String s,String Requested) {
+
+		 this.AccountsRequests.get(s).add(Requested);
+	}
+	
+	@Override
+	public boolean isUserFoundInReq(String s,String Requested) {
+
+		ArrayList<String> List =this.AccountsRequests.get(s);
+		for(String L : List) {
+			if(L.equals(Requested)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void RemoveReq(String s,String Requested) {
+		ArrayList<String> List =this.AccountsRequests.get(s);
+		List.remove(new String(Requested));
+	}
+	@Override
+	public ArrayList<String> GetReqs(String s) {
+
+		 return this.AccountsRequests.get(s);
+	}
+	
 	@Override
 	public Account getAccount(String id) {
 		for(int i=0;i<this.clientsAccount.size();i++) {
@@ -78,8 +147,22 @@ public class serverDatabaseUsingODS implements serverDatabase {
 	@Override
 	public boolean isAccountFound(String S,String P) {
 		for(int i=0;i<this.clientsAccount.size();i++) {
-			System.out.println("make it : "+this.clientsAccount.get(i).GetUserName()+ " " + this.clientsAccount.get(i).GetName() );
+		//	System.out.println("make it : "+this.clientsAccount.get(i).GetUserName()+ " " + this.clientsAccount.get(i).GetName() );
 			if(S.equals(this.clientsAccount.get(i).GetUserName()) && P.equals(this.clientsAccount.get(i).GetName()) ) {
+				System.out.println("right");
+				return true;    		
+			}
+
+
+		}
+		return false;
+
+	}
+	@Override
+	public boolean isAccountFounduser(String S) {
+		for(int i=0;i<this.clientsAccount.size();i++) {
+		//	System.out.println("make it : "+this.clientsAccount.get(i).GetUserName()+ " " + this.clientsAccount.get(i).GetName() );
+			if(S.equals(this.clientsAccount.get(i).GetUserName())  ) {
 				System.out.println("right");
 				return true;    		
 			}
@@ -153,6 +236,8 @@ public class serverDatabaseUsingODS implements serverDatabase {
 		this.clientsSockets.put(id,s);
 		this.clientssocketssarr.add(s);
 		this.clientsidsarr.add(id);
+		ArrayList<String>Req=new ArrayList<>();
+		this.AccountsRequests.put(id,Req);
 
 	}
 

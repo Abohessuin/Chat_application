@@ -1,6 +1,5 @@
 package Forms;
 
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,12 +20,12 @@ import javax.swing.event.CaretListener;
 
 import Datatype.clientServerPacket;
 
-public class ChatDmPublic extends JFrame implements ActionListener,CaretListener {
+public class ChatsPForm extends JFrame implements ActionListener,CaretListener {
 
 	JTextField jtf,jtf1;
 	JButton Button;
 	JPanel jpan;
-	int k1=0;
+	private int k1=0;
     String s1="";
     String s2="";
 	private Socket s;
@@ -36,9 +35,10 @@ public class ChatDmPublic extends JFrame implements ActionListener,CaretListener
 	private BufferedReader in;
 	private int size=0;
 	private static ArrayList <String> Dms = new  ArrayList <>();
+	public ArrayList<String>communicatedClients = new ArrayList<String>();
 	//private ArrayList<String> Name;
 	//private static serverDatabase SD ;
-	public ChatDmPublic(Socket s,ObjectOutputStream oos, BufferedReader in) throws IOException {
+	public ChatsPForm(Socket s,ObjectOutputStream oos, BufferedReader in) throws IOException {
 		this.s=s;
 		 this.oos=oos;
 		 this.in=in;
@@ -47,13 +47,7 @@ public class ChatDmPublic extends JFrame implements ActionListener,CaretListener
 		// out = new PrintWriter(this.s.getOutputStream(),true);
 		MakeForm();
 	}
-	public ChatDmPublic(Socket s,ArrayList<String> communicatedClients) throws IOException {
-		this.s=s;
-		this.Names=communicatedClients;
-		//this.SD=SD;
-		// out = new PrintWriter(this.s.getOutputStream(),true);
-		MakeForm();
-	}
+
 	
 	public static void main(String[] args) throws IOException {
 		//serverDatabase SD = new serverDatabaseUsingODS();
@@ -63,7 +57,7 @@ public class ChatDmPublic extends JFrame implements ActionListener,CaretListener
 		return k1;
 	}
 void setbounds(int k) {
-	k1+=k;
+	this.k1+=k;
 }
 	public void MakeForm() throws IOException {
 		
@@ -98,26 +92,14 @@ void setbounds(int k) {
 			setTitle("Chatting");
 		    setSize(1000,500);
 		    setVisible(true);
-		/*
-			
-			String k = null;
-			try {
-				k = in.readLine();
-				Dms.add(k);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			k1=0;
-			addlabel(k1);
-			*/
+
 			Button.addActionListener(new ActionListener(){  
 				//	private serverDatabase SD=this.SD;
 				//	private Socket s=this.s;
 					public void actionPerformed(ActionEvent e){  
 						 s1 = jtf1.getText();
 						 s2 = jtf.getText();
-							if(!s1.equals("")) {
+							if(!s1.equals("")&&!s2.equals("")) {
 								//int num = Integer.parseInt(s);
 								JLabel jlabels = new JLabel();
 								//settext(s1);
@@ -126,17 +108,26 @@ void setbounds(int k) {
 									jlabels.setForeground(new Color(120, 90, 40));
 									jlabels.setBackground(new Color(100, 20, 70));
 									jlabels.setSize(1000,200);
-									jlabels.setBounds(0, k1, 400, 75);
-									k1+=10;
+									jlabels.setBounds(0, getbounds(), 500, 75);
+									//k1+=15;
+									setbounds(75) ;
+										
+									
 									jpan.add(jlabels);
-									jlabels.setText(s1+"\n");
+									jlabels.setText(s2+"\n");
 								//	 ObjectOutputStream oos=this.oos;
 									try {
 										//SendtoMyFriend(s1,oos);
-										 ArrayList<String> Names=new ArrayList<>();
-										 Names.add(s1);
-										clientServerPacket CP= new clientServerPacket(2,s2,Names,"",jpan);
-										System.out.println(oos + " " + CP + " " + Names);
+										// ArrayList<String> Names=new ArrayList<>();
+										 //Names.add(s1);
+										
+										  String[] arrOfStr = s1.split(":", -2); 
+
+									        for (String a : arrOfStr) {
+									         communicatedClients.add(a);
+									        }
+										clientServerPacket CP= new clientServerPacket(8,s2, communicatedClients,"",jpan);
+										System.out.println("my fr " +  communicatedClients);
 										oos.writeObject(CP);
 									} catch (IOException e1) {
 										// TODO Auto-generated catch block
@@ -158,7 +149,7 @@ void setbounds(int k) {
 			  
 
 		 
-
+//	}
 	public void addlabel1(String d) {
 		JLabel jlabels = new JLabel();
 
@@ -167,8 +158,8 @@ void setbounds(int k) {
 		jlabels.setForeground(new Color(120, 90, 40));
 		jlabels.setBackground(new Color(100, 20, 70));
 		jlabels.setSize(1000,200);
-		jlabels.setBounds(0, k1, 75, 75);
-		k1+=10;
+		jlabels.setBounds(0, getbounds(), 500, 75);
+		setbounds(75) ;
 		jpan.add(jlabels);
 		jlabels.setText(d+"\n");
 

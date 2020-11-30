@@ -1,5 +1,7 @@
 package Database;
+import java.awt.Component;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import Datatype.Account;
 
@@ -16,6 +18,16 @@ public interface serverDatabase {
 	public void printclients();
 	public String GetClient(Socket s);
 	public void updataAcc(Account A);
+	void AddReqtoAcc(String s, String Requested);
+	ArrayList<String> GetReqs(String s);
+	boolean isUserFoundInReq(String s, String Requested);
+	void RemoveReq(String s,String Requested);
+	boolean isAccountFounduser(String S);
+	//public ArrayList<String> getBannedwords();
+	//public ArrayList<Socket> getClientssocketssarr();
+	//public Component getClientssocketssarr1();
+	
+	
 	
      
 }

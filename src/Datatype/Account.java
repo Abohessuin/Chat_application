@@ -5,14 +5,30 @@ public class Account {
 	private String Name;
 	private String UserName;
 	private String PassWord;
+	private String Statues;
+	private int numberOfWarning;
+	
+	public int getNumberOfWarning() {
+		return numberOfWarning;
+	}
+	public void setNumberOfWarning(int numberOfWarning) {
+		this.numberOfWarning = numberOfWarning;
+	}
+	public String getStatues() {
+		return Statues;
+	}
+	public void setStatues(String statues) {
+		Statues = statues;
+	}
 	private static ArrayList<String> Contacts;
 
 	 public Account(String Name,String UserName,String PassWord, ArrayList<String> C){
-		this.Name=Name;
-		this.UserName=UserName;
-		this.PassWord=PassWord;
-		this.Contacts=C;
-	}
+			this.Name=Name;
+			this.UserName=UserName;
+			this.PassWord=PassWord;
+			this.Contacts=C;
+			this.Statues="Allowed";
+		}
 public void printacc() {
 	for (String a : Contacts) {
 		System.out.println(a);
@@ -52,13 +68,13 @@ public void printacc() {
 	}
 	public boolean isinmycontact(String s) {
 		for (String user : this.Contacts) {
-			System.out.println(user + " dd " + s);
+			
 			if(s.equals(user)) {
-				System.out.println("here");
+			
 				return true;
 			}
 		}
-		System.out.println("out");
+		
 		return false;
 	}
 

@@ -37,7 +37,7 @@ public class contactslist extends JFrame {
             int k=0;
   for(int i=0 ; i<Strings.size() ; i++) {
             JLabel lblStanFunc = new JLabel(Strings.get(i));
-            lblStanFunc.setBounds(800, k, 300, 30);
+            lblStanFunc.setBounds(50, k, 50, 30);
             k+=10;
             lblStanFunc.setVisible(true);
             add(lblStanFunc);

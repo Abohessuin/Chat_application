@@ -94,8 +94,8 @@ void setbounds(int k1) {
 					jlabels.setForeground(new Color(120, 90, 40));
 					jlabels.setBackground(new Color(100, 20, 70));
 					jlabels.setSize(1000,200);
-					jlabels.setBounds(0, k, 400, 75);
-					k+=10;
+					jlabels.setBounds(0, k, 500, 75);
+					setbounds(75);
 					jpan.add(jlabels);
 					jlabels.setText(s1+"\n");
 					//	 ObjectOutputStream oos=this.oos;
@@ -193,8 +193,8 @@ void setbounds(int k1) {
 		jlabels.setForeground(new Color(120, 90, 40));
 		jlabels.setBackground(new Color(100, 20, 70));
 		jlabels.setSize(1000,200);
-		jlabels.setBounds(0, k, 75, 75);
-		k+=10;
+		jlabels.setBounds(0, k, 500, 75);
+		setbounds(75);
 		jpan.add(jlabels);
 		jlabels.setText(d+"\n");
 
